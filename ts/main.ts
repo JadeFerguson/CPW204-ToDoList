@@ -30,8 +30,39 @@ function main() {
  * Check form data is valid
  */
 function isValid():boolean {
-    // FIXXX
-    return true;
+    let isValid:boolean = true;
+
+    clearErrorSpans();
+
+    let title:HTMLInputElement = <HTMLInputElement>document.getElementById("title");
+    let todoTitle:string = title.value;
+
+    let date:HTMLInputElement = <HTMLInputElement>document.getElementById("due-date");
+    let todoDate:string = date.value;
+
+    if (todoTitle == "") { //parseFloat will turn milesDriven into a number
+        isValid = false;
+        title.nextElementSibling.innerHTML = 
+            "Title is required";
+    }
+
+    if (todoDate == "") { //parseFloat will turn milesDriven into a number
+        isValid = false;
+
+        date.nextElementSibling.innerHTML = 
+            "Date is required";
+    }
+    return isValid;
+    
+}
+
+function clearErrorSpans() {
+    let errorSpans = document.querySelectorAll("span");
+    for (let i = 0; i < errorSpans.length; i++) {
+        let spanBox = <HTMLInputElement>errorSpans[i];
+        spanBox.innerHTML = "*";
+    }
+    
 }
 
 /**

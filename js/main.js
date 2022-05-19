@@ -16,7 +16,30 @@ function main() {
     }
 }
 function isValid() {
-    return true;
+    var isValid = true;
+    clearErrorSpans();
+    var title = document.getElementById("title");
+    var todoTitle = title.value;
+    var date = document.getElementById("due-date");
+    var todoDate = date.value;
+    if (todoTitle == "") {
+        isValid = false;
+        title.nextElementSibling.innerHTML =
+            "Title is required";
+    }
+    if (todoDate == "") {
+        isValid = false;
+        date.nextElementSibling.innerHTML =
+            "Date is required";
+    }
+    return isValid;
+}
+function clearErrorSpans() {
+    var errorSpans = document.querySelectorAll("span");
+    for (var i = 0; i < errorSpans.length; i++) {
+        var spanBox = errorSpans[i];
+        spanBox.innerHTML = "*";
+    }
 }
 function getToDoItem() {
     var myItem = new ToDoItem();
