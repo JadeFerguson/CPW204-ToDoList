@@ -21,3 +21,12 @@
     background-color: lightseagreen;
     text-decoration: line-through; /*Strike out completed items*/
 }
+
+#complete-items {
+    border: .2em solid lightseagreen;
+}
+
+#incomplete-items {
+    border: .2em solid pink;
+    margin-bottom: 1em;
+}
