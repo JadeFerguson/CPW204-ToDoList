@@ -5,6 +5,7 @@
     padding: .6em;
     border-radius: .55em;
     margin: 1em;
+    cursor: pointer;
 }
 
 .todo h3 {
@@ -18,4 +19,5 @@
 .completed {
     opacity: 40%;
     background-color: lightseagreen;
+    text-decoration: line-through; /*Strike out completed items*/
 }

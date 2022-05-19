@@ -72,7 +72,11 @@ function displayToDoItem(item:ToDoItem):void {
     let itemDate = document.createElement("p");
     itemDate.innerText = item.dueDate.toDateString();
 
+    // ex. <div> class="todo completed"></div> or <div class="todo"></div>
     let itemDiv = document.createElement("div");
+
+    itemDiv.onclick = markAsComplete;
+
     itemDiv.classList.add("todo");
     if(item.isCompleted) {
         itemDiv.classList.add("completed");
@@ -90,6 +94,14 @@ function displayToDoItem(item:ToDoItem):void {
         let incompleteToDos = document.getElementById("incomplete-items");
         incompleteToDos.appendChild(itemDiv);
     }
+}
+
+function markAsComplete() {
+    let itemDiv = <HTMLElement>this; // once have htmlElement can add class of div
+    itemDiv.classList.add("completed");
+
+    let completedItems = document.getElementById("complete-items");
+    completedItems.appendChild(itemDiv);
 }
 
 // Task: Allow user to mark a ToDoItem as completed
