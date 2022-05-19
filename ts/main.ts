@@ -1,3 +1,7 @@
+// @ts-ignore: Ignoring issue with js-datepicker lack of intellisense
+const picker = datepicker("#due-date");
+picker.setMin(new Date()); // Set to today's date
+
 class ToDoItem {
     title:string;
     dueDate:Date;
@@ -66,7 +70,7 @@ function displayToDoItem(item:ToDoItem):void {
 
     // Put in paragraph into h3
     let itemDate = document.createElement("p");
-    itemDate.innerText = item.dueDate.toString();
+    itemDate.innerText = item.dueDate.toDateString();
 
     let itemDiv = document.createElement("div");
     if(item.isCompleted) {
@@ -75,6 +79,16 @@ function displayToDoItem(item:ToDoItem):void {
 
     itemDiv.appendChild(itemText);
     itemDiv.appendChild(itemDate);
+
+    if(item.isCompleted) {
+        let completedToDos = document.getElementById("complete-items");
+        completedToDos.appendChild(itemDiv);
+    }
+
+    else {
+        let incompleteToDos = document.getElementById("incomplete-items");
+        incompleteToDos.appendChild(itemDiv);
+    }
 }
 
 // Task: Allow user to mark a ToDoItem as completed
