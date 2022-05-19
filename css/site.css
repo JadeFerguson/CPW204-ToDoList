@@ -30,3 +30,7 @@
     border: .2em solid pink;
     margin-bottom: 1em;
 }
+
+span {
+    color: red;
+}
