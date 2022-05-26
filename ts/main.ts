@@ -18,7 +18,7 @@ window.onload = function() {
     addItem.onclick = main;
 
     // Load saved items
-    loadSavedItem();
+    loadSavedItems();
 }
 
 function main() {
@@ -29,9 +29,14 @@ function main() {
     }
 }
 
-function loadSavedItem() {
-    let item = getToDo(); // Reads from web storage
-    displayToDoItem(item);
+function loadSavedItems() {
+    let itemArray = getToDoItems(); // Reads from web storage
+    
+    for(let i = 0; i < itemArray.length; i++) {
+        let currItem = itemArray[i];
+        displayToDoItem(currItem);
+    }
+    
 }
 
 /**
@@ -146,20 +151,26 @@ function markAsComplete() {
 }
 
 function saveToDo(item:ToDoItem):void {
-    // Convert ToDoItem into JSON string
-    let itemString = JSON.stringify(item);
+    let currItems = getToDoItems();
 
-    // Save String
-    localStorage.setItem(todokey, itemString);
+    if(currItems == null) { // No items found
+        currItems = new Array();
+    }
+
+    currItems.push(item); // Add the new item to the curr item list
+
+    let currItemsString = JSON.stringify(currItems);
+    localStorage.setItem(todokey, currItemsString);
 }
 
 const todokey = "todo";
 
 /**
- * Get stored ToDo item or return null if none is found
+ * Get stored ToDo items or return null if none are found
  */
-function getToDo():ToDoItem {
+function getToDoItems():ToDoItem[] {
     let itemString = localStorage.getItem(todokey);
-    let item:ToDoItem = JSON.parse(itemString);
+    let item:ToDoItem[] = JSON.parse(itemString);
     return item;
 }
+
